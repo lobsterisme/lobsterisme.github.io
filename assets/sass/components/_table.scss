@@ -1,5 +1,5 @@
 ///
-/// Massively by HTML5 UP
+/// Fractal by HTML5 UP
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
@@ -17,37 +17,32 @@
 
 		tbody {
 			tr {
-				border: solid 1px;
+				border-style: solid;
+				border-width: _size(border-width);
 				border-left: 0;
 				border-right: 0;
 			}
 		}
 
 		td {
-			padding: 0.75rem 0.75rem;
+			padding: 0.75em 0.75em;
 		}
 
 		th {
-			font-family: _font(family-heading);
-			font-size: 0.8rem;
-			font-weight: _font(weight-heading);
-			letter-spacing: 0.075em;
-			line-height: 1.5;
-			padding: 0 0.75rem 0.75rem 0.75rem;
+			font-size: 0.9em;
+			font-weight: _font(weight-bold);
+			padding: 0 0.75em 0.75em 0.75em;
 			text-align: left;
-			text-transform: uppercase;
-
-			@include breakpoint('<=medium') {
-				font-size: 0.9rem;
-			}
 		}
 
 		thead {
-			border-bottom: solid 2px;
+			border-bottom-style: solid;
+			border-bottom-width: (_size(border-width) * 2);
 		}
 
 		tfoot {
-			border-top: solid 2px;
+			border-top-style: solid;
+			border-top-width: (_size(border-width) * 2);
 		}
 
 		&.alt {
@@ -56,18 +51,19 @@
 			tbody {
 				tr {
 					td {
-						border: solid 1px;
+						border-style: solid;
+						border-width: _size(border-width);
 						border-left-width: 0;
 						border-top-width: 0;
 
 						&:first-child {
-							border-left-width: 1px;
+							border-left-width: _size(border-width);
 						}
 					}
 
 					&:first-child {
 						td {
-							border-top-width: 1px;
+							border-top-width: _size(border-width);
 						}
 					}
 				}
@@ -85,6 +81,7 @@
 
 	@mixin color-table($p: null) {
 		table {
+
 			tbody {
 				tr {
 					border-color: _palette($p, border);
@@ -108,6 +105,7 @@
 			}
 
 			&.alt {
+
 				tbody {
 					tr {
 						td {
