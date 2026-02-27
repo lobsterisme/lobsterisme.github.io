@@ -53,7 +53,7 @@
 								</div>
 								<div class="container">
 									<header class="major">
-										<h2>Welcome!</h2>
+										<h2>I pitch it, build it, and ship it.</h2>
 									</header>
 									<p>I'm Taylor Christianson — a game developer and natural team lead with 4.5 years of professional experience at Halfbrick Studios. I consistently take on lead roles across every project I work on, from pitching ideas and building prototypes to driving teams from concept through production. My technical expertise is in Unity and C#, with generalist experience spanning systems architecture, game design, mobile optimization, and tool development.</p>
 								</div>
@@ -64,29 +64,481 @@
 								<div class="container">
 									<h3>Favorite Projects</h3>
 									<p>A selection of projects I'm most proud of.</p>
-									<div class="features">
-										<article>
-											<a href="#five" class="image"><img src="images/ScrapticsThumbnail.png" alt="" /></a>
-											<div class="inner">
+
+									<!-- Gallery Styles -->
+									<style>
+										/* Project Card */
+										.project-card {
+											background: rgba(255,255,255,0.03);
+											border: 1px solid rgba(255,255,255,0.1);
+											border-radius: 6px;
+											padding: 1.5em;
+											margin-bottom: 2em;
+										}
+										.project-card-header {
+											display: flex;
+											gap: 1.5em;
+											align-items: flex-start;
+											margin-bottom: 1.2em;
+										}
+										.project-card-thumb {
+											flex-shrink: 0;
+											width: 160px;
+											height: 110px;
+											object-fit: cover;
+											border-radius: 4px;
+											display: block;
+										}
+										.project-card-info h4 { margin: 0 0 0.3em 0; }
+										.project-card-info p { margin: 0; font-size: 0.9em; }
+										.project-card-meta { font-size: 0.8em; color: #aaa; margin-top: 0.4em; }
+
+										/* Swipeable Strip */
+										.gallery-strip-wrap {
+											position: relative;
+											overflow: hidden;
+											border-radius: 4px;
+											cursor: grab;
+											user-select: none;
+										}
+										.gallery-strip-wrap:active { cursor: grabbing; }
+										.gallery-strip {
+											display: flex;
+											gap: 8px;
+											padding: 4px 2px;
+											will-change: transform;
+										}
+										.gallery-strip-item {
+											flex-shrink: 0;
+											width: 180px;
+											height: 120px;
+											border-radius: 4px;
+											overflow: hidden;
+											cursor: pointer;
+											position: relative;
+											background: rgba(0,0,0,0.3);
+											transition: opacity 0.15s;
+										}
+										.gallery-strip-item:hover { opacity: 0.82; }
+										.gallery-strip-item img {
+											width: 100%;
+											height: 100%;
+											object-fit: cover;
+											display: block;
+											pointer-events: none;
+										}
+										/* YouTube thumbnail in strip */
+										.gallery-strip-item.yt-thumb {
+											position: relative;
+										}
+										.gallery-strip-item.yt-thumb::after {
+											content: '▶';
+											position: absolute;
+											inset: 0;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											font-size: 2em;
+											color: rgba(255,255,255,0.85);
+											background: rgba(0,0,0,0.3);
+											pointer-events: none;
+										}
+										.gallery-placeholder {
+											padding: 1.2em;
+											text-align: center;
+											color: #555;
+											font-style: italic;
+											font-size: 0.85em;
+											border: 1px dashed rgba(255,255,255,0.08);
+											border-radius: 4px;
+										}
+
+										/* Lightbox */
+										.lightbox {
+											display: none;
+											position: fixed;
+											inset: 0;
+											z-index: 9999;
+											align-items: center;
+											justify-content: center;
+										}
+										.lightbox.active { display: flex; }
+										.lightbox-backdrop {
+											position: absolute;
+											inset: 0;
+											backdrop-filter: blur(18px) brightness(0.45);
+											-webkit-backdrop-filter: blur(18px) brightness(0.45);
+											background: rgba(0,0,0,0.55);
+										}
+										.lightbox-inner {
+											position: relative;
+											z-index: 2;
+											width: 90vw;
+											max-width: 1100px;
+											display: flex;
+											flex-direction: column;
+											align-items: center;
+										}
+										.lightbox-media {
+											width: 100%;
+											max-height: 72vh;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											border-radius: 6px;
+											overflow: hidden;
+											background: rgba(0,0,0,0.2);
+										}
+										.lightbox-media img {
+											max-width: 100%;
+											max-height: 72vh;
+											object-fit: contain;
+											display: block;
+											border-radius: 4px;
+										}
+										.lightbox-media iframe {
+											width: 100%;
+											aspect-ratio: 16/9;
+											border: none;
+											border-radius: 4px;
+										}
+										.lightbox-controls {
+											display: flex;
+											align-items: center;
+											gap: 1em;
+											margin-top: 0.9em;
+										}
+										.lightbox-btn {
+											background: rgba(255,255,255,0.12);
+											color: #fff;
+											border: none;
+											width: 42px;
+											height: 42px;
+											border-radius: 50%;
+											font-size: 1.3em;
+											cursor: pointer;
+											transition: background 0.2s;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											line-height: 1;
+										}
+										.lightbox-btn:hover { background: rgba(255,255,255,0.25); }
+										.lightbox-counter { color: rgba(255,255,255,0.7); font-size: 0.85em; min-width: 60px; text-align: center; }
+										.lightbox-close {
+											position: absolute;
+											top: -2.4em;
+											right: 0;
+											background: none;
+											border: none;
+											color: rgba(255,255,255,0.7);
+											font-size: 1.6em;
+											cursor: pointer;
+											line-height: 1;
+											padding: 0;
+											transition: color 0.15s;
+										}
+										.lightbox-close:hover { color: #fff; }
+
+										@media (max-width: 600px) {
+											.project-card-header { flex-direction: column; }
+											.project-card-thumb { width: 100%; height: auto; }
+											.gallery-strip-item { width: 140px; height: 94px; }
+										}
+									</style>
+
+									<!-- Lightbox Container (shared across all galleries) -->
+									<div class="lightbox" id="lightbox">
+										<div class="lightbox-backdrop" onclick="lbClose()"></div>
+										<div class="lightbox-inner">
+											<button class="lightbox-close" onclick="lbClose()" title="Close">&times;</button>
+											<div class="lightbox-media" id="lb-media"></div>
+											<div class="lightbox-controls">
+												<button class="lightbox-btn" onclick="lbMove(-1)">&#8249;</button>
+												<span class="lightbox-counter" id="lb-counter"></span>
+												<button class="lightbox-btn" onclick="lbMove(1)">&#8250;</button>
+											</div>
+										</div>
+									</div>
+
+									<!-- Project 1: Scraptics -->
+									<div class="project-card">
+										<div class="project-card-header">
+											<img class="project-card-thumb" src="images/projects/scraptics/thumb.png" alt="Scraptics thumbnail" />
+											<div class="project-card-info">
 												<h4>Scraptics</h4>
-												<p>A tactical roguelike on a hex grid with a unique inventory puzzle mechanic. Built in Unity 6, shipped to closed beta on iOS and Android. Led as programmer, designer, and team lead for 3 years at Halfbrick Studios.</p>
+												<p>A tactical turn-based roguelike on a hex grid with a unique inventory puzzle mechanic. Built in Unity 6, shipped to closed beta on iOS and Android. Pitched, selected, and led a team of 4 as programmer, designer, and team lead for 3 years at Halfbrick Studios.</p>
+												<p class="project-card-meta">Unity 6 &bull; C# &bull; iOS &amp; Android &bull; Halfbrick Studios &bull; 2021&ndash;2026</p>
 											</div>
-										</article>
-										<article>
-											<a href="#five" class="image"><img src="images/TTMThumb.PNG" alt="" /></a>
-											<div class="inner">
-												<h4>To The Moon!</h4>
-												<p>A competitive 3D space dogfighter built in Unity HDRP with Photon Networking. Led a team of 6 as project lead, responsible for AI, full networking stack, and multiplayer UI.</p>
+										</div>
+										<!-- Strip: populated from images/projects/scraptics/slides.json -->
+										<div class="gallery-strip-wrap" id="strip-scraptics">
+											<div class="gallery-strip" data-project="scraptics">
+												<div class="gallery-placeholder">Screenshots &amp; footage coming soon</div>
 											</div>
-										</article>
-										<article>
-											<a href="#five" class="image"><img src="images/RSThumb.PNG" alt="" /></a>
-											<div class="inner">
+										</div>
+									</div>
+
+									<!-- Project 2: Sumo Fight -->
+									<div class="project-card">
+										<div class="project-card-header">
+											<img class="project-card-thumb" src="images/projects/sumo-fight/thumb.png" alt="Sumo Fight thumbnail" />
+											<div class="project-card-info">
+												<h4>Sumo Fight</h4>
+												<p>Multiplayer beat-em-up party game built in one week using Unity and Photon Networking. Lead programmer on a team of 5.</p>
+												<p class="project-card-meta">Unity 6 &bull; C# &bull; Photon &bull; iOS &amp; Android &bull; Halfbrick Internal Game Jam &bull; 2024</p>
+											</div>
+										</div>
+										<!-- Strip: populated from images/projects/sumo-fight/slides.json -->
+										<div class="gallery-strip-wrap" id="strip-sumo-fight">
+											<div class="gallery-strip" data-project="sumo-fight">
+												<div class="gallery-placeholder">Screenshots &amp; footage coming soon</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Project 3: Survivors Aren't Dead -->
+									<div class="project-card">
+										<div class="project-card-header">
+											<img class="project-card-thumb" src="images/projects/survivors/thumb.png" alt="Survivors Aren't Dead thumbnail" />
+											<div class="project-card-info">
+												<h4>Survivors Aren't Dead</h4>
+												<p>Survivor-like action game built in one week in Unity. Pitch and project lead and lead programmer on a team of 4.</p>
+												<p class="project-card-meta">Unity 6 &bull; C# &bull; iOS &amp; Android &bull; Halfbrick Internal Game Jam &bull; 2023</p>
+											</div>
+										</div>
+										<!-- Strip: populated from images/projects/survivors/slides.json -->
+										<div class="gallery-strip-wrap" id="strip-survivors">
+											<div class="gallery-strip" data-project="survivors">
+												<div class="gallery-placeholder">Screenshots &amp; footage coming soon</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Project 4: Retrospectre -->
+									<div class="project-card">
+										<div class="project-card-header">
+											<img class="project-card-thumb" src="images/projects/retrospectre/thumb.png" alt="Retrospectre thumbnail" />
+											<div class="project-card-info">
 												<h4>Retrospectre</h4>
 												<p>A retrowave-inspired 2.5D metroidvania platformer built in Unity. Led a team of 4, designed and implemented AI systems for 8+ enemy types, player controller, and all interactable systems.</p>
+												<p class="project-card-meta">Unity &bull; C# &bull; PC &amp; Web &bull; Full Sail University &bull; 2019</p>
 											</div>
-										</article>
+										</div>
+										<!-- Strip: populated from images/projects/retrospectre/slides.json -->
+										<div class="gallery-strip-wrap" id="strip-retrospectre">
+											<div class="gallery-strip" data-project="retrospectre">
+												<div class="gallery-placeholder">Screenshots &amp; footage coming soon</div>
+											</div>
+										</div>
 									</div>
+
+									<!-- Project 5: To The Moon! -->
+									<div class="project-card">
+										<div class="project-card-header">
+											<img class="project-card-thumb" src="images/projects/to-the-moon/thumb.png" alt="To The Moon thumbnail" />
+											<div class="project-card-info">
+												<h4>To The Moon!</h4>
+												<p>A competitive 3D space dogfighter built in Unity HDRP with Photon Networking. Led a team of 6 as project lead, responsible for AI, full networking stack, and multiplayer UI.</p>
+												<p class="project-card-meta">Unity HDRP &bull; C# &bull; Photon &bull; PC &bull; Full Sail University &bull; 2021</p>
+											</div>
+										</div>
+										<!-- Strip: populated from images/projects/to-the-moon/slides.json -->
+										<div class="gallery-strip-wrap" id="strip-to-the-moon">
+											<div class="gallery-strip" data-project="to-the-moon">
+												<div class="gallery-placeholder">Screenshots &amp; footage coming soon</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Gallery Script -->
+									<script>
+									(function() {
+
+										var PROJECTS = ['scraptics','sumo-fight','survivors','retrospectre','to-the-moon'];
+
+										// ── Load slides from JSON ─────────────────────────────────
+										function loadProject(id) {
+											var strip = document.querySelector('.gallery-strip[data-project="' + id + '"]');
+											if (!strip) return;
+											fetch('images/projects/' + id + '/slides.json')
+												.then(function(r) { return r.json(); })
+												.then(function(data) {
+													// Support both old array format and new {thumb, slides} format
+													var slides = Array.isArray(data) ? data : (data.slides || []);
+													var thumb  = Array.isArray(data) ? null : (data.thumb || null);
+
+													// Update thumbnail if specified in JSON
+													if (thumb) {
+														var card = strip.closest('.project-card');
+														if (card) {
+															var thumbEl = card.querySelector('.project-card-thumb');
+															if (thumbEl) thumbEl.src = thumb;
+														}
+													}
+
+													if (!slides.length) return;
+													strip.innerHTML = '';
+													slides.forEach(function(item, i) {
+														var el = document.createElement('div');
+														el.className = 'gallery-strip-item' + (item.type === 'youtube' ? ' yt-thumb' : '');
+														el.dataset.gallery = id;
+														el.dataset.type    = item.type;
+														el.dataset.src     = item.src;
+														el.onclick = (function(idx) {
+															return function() { lbOpen(id, idx); };
+														})(i);
+														var img = document.createElement('img');
+														if (item.type === 'youtube') {
+															img.src = 'https://img.youtube.com/vi/' + item.src + '/mqdefault.jpg';
+														} else {
+															img.src = item.src;
+														}
+														img.alt = item.alt || '';
+														el.appendChild(img);
+														strip.appendChild(el);
+													});
+													initSwipe(strip.closest('.gallery-strip-wrap'));
+												})
+												.catch(function() {
+													// slides.json missing or empty — placeholder stays
+												});
+										}
+
+										// ── Swipe strip ──────────────────────────────────────────
+										function initSwipe(wrap) {
+											var strip = wrap.querySelector('.gallery-strip');
+											var startX = 0, startScroll = 0, dragging = false, moved = false;
+											var velX = 0, lastX = 0, rafId = null;
+
+											function getClientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+
+											wrap.addEventListener('mousedown', startDrag);
+											wrap.addEventListener('touchstart', startDrag, { passive: true });
+
+											function startDrag(e) {
+												dragging = true; moved = false;
+												startX = getClientX(e);
+												startScroll = strip._offset || 0;
+												velX = 0; lastX = startX;
+												if (rafId) cancelAnimationFrame(rafId);
+											}
+
+											window.addEventListener('mousemove', onDrag);
+											window.addEventListener('touchmove', onDrag, { passive: false });
+
+											function onDrag(e) {
+												if (!dragging) return;
+												var x = getClientX(e);
+												var dx = x - startX;
+												if (Math.abs(dx) > 4) moved = true;
+												if (moved && e.cancelable) e.preventDefault();
+												velX = x - lastX; lastX = x;
+												setOffset(startScroll - dx);
+											}
+
+											window.addEventListener('mouseup', endDrag);
+											window.addEventListener('touchend', endDrag);
+
+											function endDrag() {
+												if (!dragging) return;
+												dragging = false;
+												var v = -velX * 0.8;
+												function momentum() {
+													if (Math.abs(v) < 0.4) { clamp(); return; }
+													setOffset((strip._offset || 0) + v);
+													v *= 0.88;
+													rafId = requestAnimationFrame(momentum);
+												}
+												momentum();
+											}
+
+											function setOffset(val) {
+												var maxScroll = Math.max(0, strip.scrollWidth - wrap.clientWidth + 16);
+												if (val < 0) val = val * 0.25;
+												if (val > maxScroll) val = maxScroll + (val - maxScroll) * 0.25;
+												strip._offset = val;
+												strip.style.transform = 'translateX(' + (-val) + 'px)';
+											}
+
+											function clamp() {
+												var maxScroll = Math.max(0, strip.scrollWidth - wrap.clientWidth + 16);
+												var target = Math.max(0, Math.min(strip._offset || 0, maxScroll));
+												animateTo(target);
+											}
+
+											function animateTo(target) {
+												var cur = strip._offset || 0;
+												var diff = target - cur;
+												if (Math.abs(diff) < 0.5) { setOffset(target); return; }
+												setOffset(cur + diff * 0.18);
+												rafId = requestAnimationFrame(function() { animateTo(target); });
+											}
+
+											wrap.addEventListener('click', function(e) {
+												if (moved) { e.stopPropagation(); e.preventDefault(); }
+											}, true);
+										}
+
+										// ── Lightbox ─────────────────────────────────────────────
+										var lb = { items: [], index: 0 };
+
+										window.lbOpen = function(gallery, idx) {
+											var items = Array.from(document.querySelectorAll('[data-gallery="' + gallery + '"]'));
+											if (!items.length) return;
+											lb.items = items;
+											lb.index = idx;
+											document.getElementById('lightbox').classList.add('active');
+											document.body.style.overflow = 'hidden';
+											lbRender();
+										};
+
+										window.lbClose = function() {
+											document.getElementById('lightbox').classList.remove('active');
+											document.body.style.overflow = '';
+											document.getElementById('lb-media').innerHTML = '';
+										};
+
+										window.lbMove = function(dir) {
+											lb.index = (lb.index + dir + lb.items.length) % lb.items.length;
+											lbRender();
+										};
+
+										function lbRender() {
+											var item = lb.items[lb.index];
+											var type = item.dataset.type;
+											var src  = item.dataset.src;
+											var media = document.getElementById('lb-media');
+											media.innerHTML = '';
+											if (type === 'youtube') {
+												var iframe = document.createElement('iframe');
+												iframe.src = 'https://www.youtube.com/embed/' + src + '?autoplay=1';
+												iframe.allow = 'autoplay; fullscreen';
+												iframe.allowFullscreen = true;
+												media.appendChild(iframe);
+											} else {
+												var img = document.createElement('img');
+												img.src = src;
+												img.alt = item.querySelector('img') ? item.querySelector('img').alt : '';
+												media.appendChild(img);
+											}
+											document.getElementById('lb-counter').textContent = (lb.index + 1) + ' / ' + lb.items.length;
+										}
+
+										document.addEventListener('keydown', function(e) {
+											if (!document.getElementById('lightbox').classList.contains('active')) return;
+											if (e.key === 'ArrowLeft')  lbMove(-1);
+											if (e.key === 'ArrowRight') lbMove(1);
+											if (e.key === 'Escape')     lbClose();
+										});
+
+										// ── Init ─────────────────────────────────────────────────
+										document.addEventListener('DOMContentLoaded', function() {
+											PROJECTS.forEach(loadProject);
+										});
+
+									})();
+									</script>
 								</div>
 							</section>	
 

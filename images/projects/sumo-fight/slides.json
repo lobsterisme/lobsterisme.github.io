@@ -1,0 +1,4 @@
+[
+  { "type": "image",   "src": "images/projects/scraptics/slide_1.gif", "alt": "Scraptics gameplay" },
+  { "type": "youtube", "src": "VIDEO_ID",                               "alt": "Scraptics trailer" }
+]
