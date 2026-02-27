@@ -24,10 +24,9 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="#one" class="active">About</a></li>
-						<li><a href="#two">Favorite Projects</a></li>
+						<li><a href="#two">Projects</a></li>
 						<li><a href="#three">Resume</a></li>
 						<li><a href="#four">Contact</a></li>
-						<li><a href="#five">All Projects</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -35,7 +34,7 @@
 						<li><a href="https://www.linkedin.com/in/taylor-christianson-066991159/" class="icon brands alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
 						<li><a href="#four" class="icon brands alt fa-discord"><span class="label">Discord</span></a></li>
 						<li><a href="https://github.com/lobsterisme" class="icon brands alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-						<li><a href="mailto:tchristianson@alumni.fullsail.edu" class="icon solid alt fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+						<li><a href="/cdn-cgi/l/email-protection#7703141f051e04031e161904181937161b021a191e5911021b1b04161e1b59121302" class="icon solid alt fa-envelope" target="_blank"><span class="label">Email</span></a></li>
 					</ul>
 				</footer>
 			</section>
@@ -53,7 +52,7 @@
 								</div>
 								<div class="container">
 									<header class="major">
-										<h2>Welcome!</h2>
+										<h2>I pitch it, build it, and ship it.</h2>
 									</header>
 									<p>I'm Taylor Christianson — a game developer and natural team lead with 4.5 years of professional experience at Halfbrick Studios. I consistently take on lead roles across every project I work on, from pitching ideas and building prototypes to driving teams from concept through production. My technical expertise is in Unity and C#, with generalist experience spanning systems architecture, game design, mobile optimization, and tool development.</p>
 								</div>
@@ -62,33 +61,836 @@
 						<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<h3>Favorite Projects</h3>
-									<p>A selection of projects I'm most proud of.</p>
-									<div class="features">
-										<article>
-											<a href="#five" class="image"><img src="images/ScrapticsThumbnail.png" alt="" /></a>
-											<div class="inner">
-												<h4>Scraptics</h4>
-												<p>A tactical roguelike on a hex grid with a unique inventory puzzle mechanic. Built in Unity 6, shipped to closed beta on iOS and Android. Led as programmer, designer, and team lead for 3 years at Halfbrick Studios.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#five" class="image"><img src="images/TTMThumb.PNG" alt="" /></a>
-											<div class="inner">
-												<h4>To The Moon!</h4>
-												<p>A competitive 3D space dogfighter built in Unity HDRP with Photon Networking. Led a team of 6 as project lead, responsible for AI, full networking stack, and multiplayer UI.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#five" class="image"><img src="images/RSThumb.PNG" alt="" /></a>
-											<div class="inner">
-												<h4>Retrospectre</h4>
-												<p>A retrowave-inspired 2.5D metroidvania platformer built in Unity. Led a team of 4, designed and implemented AI systems for 8+ enemy types, player controller, and all interactable systems.</p>
-											</div>
-										</article>
+									<h3>Projects</h3>
+									<p>Click any game to explore it.</p>
+
+									<style>
+										/* ── App Grid ── */
+										.app-grid {
+											display: flex;
+											flex-wrap: wrap;
+											gap: 2em 1.5em;
+											justify-content: flex-start;
+											padding: 1em 0 2.5em;
+											overflow: visible;
+										}
+										.app-icon-wrap {
+											display: flex;
+											flex-direction: column;
+											align-items: center;
+											width: 120px;
+											cursor: pointer;
+											user-select: none;
+											overflow: visible;
+										}
+										.app-icon-stage {
+											width: 120px;
+											height: 120px;
+											perspective: 500px;
+										}
+										.app-icon-inner {
+											width: 100%;
+											height: 100%;
+											border-radius: 26px;
+											overflow: hidden;
+											box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+											transform-style: preserve-3d;
+											transition: box-shadow 0.2s;
+											will-change: transform;
+										}
+										.app-icon-inner img {
+											width: 100%;
+											height: 100%;
+											object-fit: fill;
+											display: block;
+											pointer-events: none;
+										}
+										.app-icon-inner .app-icon-placeholder {
+											width: 100%;
+											height: 100%;
+											background: linear-gradient(135deg, #1a3a4a, #0d2030);
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											font-size: 2em;
+											color: rgba(255,255,255,0.3);
+										}
+										.app-icon-wrap:hover .app-icon-inner {
+											box-shadow: 0 12px 36px rgba(0,0,0,0.7);
+										}
+										.app-icon-label {
+											display: block !important;
+											visibility: visible !important;
+											margin-top: 0.55em;
+											font-size: 0.75em;
+											text-align: center;
+											color: #3d4449 !important;
+											line-height: 1.3;
+											width: 120px;
+											word-break: break-word;
+											position: relative;
+											z-index: 1;
+										}
+
+										/* ── App Store Popup ── */
+										.appstore-overlay {
+											display: none;
+											position: fixed;
+											inset: 0;
+											z-index: 9999;
+										}
+										.appstore-overlay.active { display: flex; align-items: flex-end; }
+										.appstore-backdrop {
+											position: absolute;
+											inset: 0;
+											backdrop-filter: blur(14px) brightness(0.4);
+											-webkit-backdrop-filter: blur(14px) brightness(0.4);
+											background: rgba(0,0,0,0.5);
+										}
+										.appstore-sheet {
+											position: relative;
+											z-index: 2;
+											width: 100%;
+											min-height: 75vh;
+											max-height: 90vh;
+											background: #1a1f24;
+											border-radius: 20px 20px 0 0;
+											overflow-y: auto;
+											padding: 0 0 2em;
+											transform: translateY(100%);
+											transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+										}
+										.appstore-overlay.active .appstore-sheet {
+											transform: translateY(0);
+										}
+										.appstore-handle {
+											width: 40px;
+											height: 4px;
+											background: rgba(255,255,255,0.2);
+											border-radius: 2px;
+											margin: 12px auto 0;
+										}
+										.appstore-header {
+											display: flex;
+											align-items: flex-start;
+											gap: 1.2em;
+											padding: 1.4em 1.6em 1em;
+											border-bottom: 1px solid rgba(255,255,255,0.07);
+										}
+										.appstore-header-icon {
+											flex-shrink: 0;
+											width: 126px;
+											height: 126px;
+											border-radius: 28px;
+											overflow: hidden;
+											box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+										}
+										.appstore-header-icon img {
+											width: 100%;
+											height: 100%;
+											object-fit: cover;
+											display: block;
+										}
+										.appstore-header-icon .app-icon-placeholder {
+											width: 100%;
+											height: 100%;
+											background: linear-gradient(135deg, #1a3a4a, #0d2030);
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											font-size: 1.6em;
+											color: rgba(255,255,255,0.3);
+										}
+										.appstore-header-info { flex: 1; }
+										.appstore-header-info h3 {
+											margin: 0 0 0.15em;
+											font-size: 1.3em;
+											line-height: 1.2;
+										}
+										.appstore-header-meta {
+											font-size: 0.8em;
+											color: #aaa;
+											margin: 0 0 0.5em;
+										}
+										.appstore-header-tags {
+											display: flex;
+											flex-wrap: wrap;
+											gap: 0.4em;
+										}
+										.appstore-tag {
+											background: rgba(255,255,255,0.08);
+											border-radius: 20px;
+											padding: 0.2em 0.7em;
+											font-size: 0.72em;
+											color: rgba(255,255,255,0.7);
+										}
+										.appstore-close {
+											flex-shrink: 0;
+											background: rgba(255,255,255,0.1);
+											border: none;
+											color: #fff;
+											width: 30px;
+											height: 30px;
+											border-radius: 50%;
+											font-size: 1em;
+											cursor: pointer;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											margin-top: 4px;
+											transition: background 0.2s;
+										}
+										.appstore-close:hover { background: rgba(255,255,255,0.2); }
+										.appstore-body {
+											padding: 1.4em 1.6em 0;
+										}
+										.appstore-desc {
+											font-size: 0.9em;
+											line-height: 1.7;
+											color: rgba(255,255,255,0.8);
+											margin-bottom: 1.2em;
+										}
+										.appstore-bullets {
+											font-size: 0.85em;
+											color: rgba(255,255,255,0.7);
+											padding-left: 1.2em;
+											margin-bottom: 1.4em;
+											line-height: 1.8;
+										}
+
+										/* Gallery strip inside popup */
+										.appstore-gallery-wrap {
+											position: relative;
+											overflow: hidden;
+											border-radius: 10px;
+											cursor: grab;
+											user-select: none;
+											margin-bottom: 1em;
+										}
+										.appstore-gallery-wrap:active { cursor: grabbing; }
+										.appstore-gallery-strip {
+											display: flex;
+											gap: 10px;
+											padding: 4px 2px;
+											will-change: transform;
+										}
+										.appstore-gallery-item {
+											flex-shrink: 0;
+											width: 300px;
+											height: 220px;
+											border-radius: 8px;
+											overflow: hidden;
+											cursor: pointer;
+											background: rgba(0,0,0,0.3);
+											transition: opacity 0.15s;
+										}
+										.appstore-gallery-item:hover { opacity: 0.82; }
+										.appstore-gallery-item img {
+											width: 100%;
+											height: 100%;
+											object-fit: cover;
+											display: block;
+											pointer-events: none;
+										}
+										.appstore-roles {
+											display: flex;
+											flex-wrap: wrap;
+											gap: 0.4em;
+											margin-bottom: 1.4em;
+										}
+										.appstore-role {
+											background: rgba(255,255,255,0.13);
+											border: 1px solid rgba(255,255,255,0.18);
+											border-radius: 20px;
+											padding: 0.25em 0.8em;
+											font-size: 0.75em;
+											font-weight: 600;
+											color: rgba(255,255,255,0.9);
+										}
+										.appstore-gallery-item.yt-thumb { position: relative; }
+										.appstore-gallery-item.yt-thumb::after {
+											content: '▶';
+											position: absolute;
+											inset: 0;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											font-size: 2em;
+											color: rgba(255,255,255,0.9);
+											background: rgba(0,0,0,0.3);
+											pointer-events: none;
+										}
+										.appstore-gallery-placeholder {
+											padding: 1.5em;
+											text-align: center;
+											color: #555;
+											font-style: italic;
+											font-size: 0.85em;
+											border: 1px dashed rgba(255,255,255,0.08);
+											border-radius: 8px;
+											margin-bottom: 1em;
+										}
+
+										/* Lightbox */
+										.as-lightbox {
+											display: none;
+											position: fixed;
+											inset: 0;
+											z-index: 10000;
+											align-items: center;
+											justify-content: center;
+										}
+										.as-lightbox.active { display: flex; }
+										.as-lightbox-backdrop {
+											position: absolute;
+											inset: 0;
+											backdrop-filter: blur(18px) brightness(0.35);
+											-webkit-backdrop-filter: blur(18px) brightness(0.35);
+											background: rgba(0,0,0,0.6);
+										}
+										.as-lightbox-inner {
+											position: relative;
+											z-index: 2;
+											width: 92vw;
+											max-width: 1100px;
+											display: flex;
+											flex-direction: column;
+											align-items: center;
+										}
+										.as-lightbox-media {
+											width: 100%;
+											max-height: 75vh;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											border-radius: 8px;
+											overflow: hidden;
+										}
+										.as-lightbox-media img {
+											max-width: 100%;
+											max-height: 75vh;
+											object-fit: contain;
+											border-radius: 6px;
+										}
+										.as-lightbox-media iframe {
+											width: 100%;
+											aspect-ratio: 16/9;
+											border: none;
+											border-radius: 6px;
+										}
+										.as-lightbox-controls {
+											display: flex;
+											align-items: center;
+											gap: 1em;
+											margin-top: 0.9em;
+										}
+										.as-lb-btn {
+											background: rgba(255,255,255,0.12);
+											color: #fff;
+											border: none;
+											width: 44px;
+											height: 44px;
+											border-radius: 50%;
+											font-size: 1.4em;
+											cursor: pointer;
+											transition: background 0.2s;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										}
+										.as-lb-btn:hover { background: rgba(255,255,255,0.25); }
+										.as-lb-counter { color: rgba(255,255,255,0.7); font-size: 0.85em; min-width: 56px; text-align: center; }
+										.as-lb-close {
+											position: absolute;
+											top: -2.6em;
+											right: 0;
+											background: none;
+											border: none;
+											color: rgba(255,255,255,0.7);
+											font-size: 1.7em;
+											cursor: pointer;
+											padding: 0;
+											transition: color 0.15s;
+										}
+										.as-lb-close:hover { color: #fff; }
+
+										.appstore-gallery-outer {
+											position: relative;
+											margin-bottom: 1em;
+										}
+										.appstore-gallery-arrow {
+											position: absolute;
+											top: 50%;
+											transform: translateY(-50%);
+											z-index: 10;
+											width: 36px;
+											height: 36px;
+											border-radius: 50%;
+											border: none;
+											background: rgba(255,255,255,0.15);
+											color: #fff;
+											font-size: 1.3em;
+											cursor: pointer;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											transition: background 0.2s, opacity 0.2s;
+											backdrop-filter: blur(4px);
+											-webkit-backdrop-filter: blur(4px);
+										}
+										.appstore-gallery-arrow:hover { background: rgba(255,255,255,0.28); }
+										.appstore-gallery-arrow.arrow-prev { left: 6px; }
+										.appstore-gallery-arrow.arrow-next { right: 6px; }
+										.appstore-gallery-arrow:disabled {
+											opacity: 0;
+											pointer-events: none;
+										}
+
+										@media (max-width: 500px) {
+											.appstore-gallery-item { width: 180px; height: 120px; }
+											.appstore-header-icon { width: 80px; height: 80px; border-radius: 18px; }
+										}
+									</style>
+
+									<!-- App Grid -->
+									<div class="app-grid" id="app-grid">
+										<!-- Icons injected by JS from GAME_DATA -->
 									</div>
+
+									<!-- App Store Sheet -->
+									<div class="appstore-overlay" id="appstore-overlay">
+										<div class="appstore-backdrop" id="appstore-backdrop"></div>
+										<div class="appstore-sheet" id="appstore-sheet">
+											<div class="appstore-handle"></div>
+											<div class="appstore-header">
+												<div class="appstore-header-icon" id="as-icon"></div>
+												<div class="appstore-header-info">
+													<h3 id="as-title"></h3>
+													<p class="appstore-header-meta" id="as-meta"></p>
+													<div class="appstore-header-tags" id="as-tags"></div>
+												</div>
+												<button class="appstore-close" onclick="asClose()">&times;</button>
+											</div>
+											<div class="appstore-body">
+												<p class="appstore-desc" id="as-desc"></p>
+												<ul class="appstore-bullets" id="as-bullets"></ul>
+												<div class="appstore-roles" id="as-roles"></div>
+												<div id="as-gallery-area"></div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Lightbox -->
+									<div class="as-lightbox" id="as-lightbox">
+										<div class="as-lightbox-backdrop" onclick="asLbClose()"></div>
+										<div class="as-lightbox-inner">
+											<button class="as-lb-close" onclick="asLbClose()">&times;</button>
+											<div class="as-lightbox-media" id="as-lb-media"></div>
+											<div class="as-lightbox-controls">
+												<button class="as-lb-btn" onclick="asLbMove(-1)">&#8249;</button>
+												<span class="as-lb-counter" id="as-lb-counter"></span>
+												<button class="as-lb-btn" onclick="asLbMove(1)">&#8250;</button>
+											</div>
+										</div>
+									</div>
+
+									<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+									(function() {
+
+										// ── Game Data (loaded from games.json) ───────────────────
+										var GAMES = [];
+
+										function buildGrid() {
+											// ── Build app grid ───────────────────────────────────────
+											var grid = document.getElementById('app-grid');
+											GAMES.forEach(function(game) {
+											var wrap = document.createElement('div');
+											wrap.className = 'app-icon-wrap';
+
+											var stage = document.createElement('div');
+											stage.className = 'app-icon-stage';
+											var inner = document.createElement('div');
+											inner.className = 'app-icon-inner';
+											inner.id = 'icon-inner-' + game.id;
+
+											var img = document.createElement('img');
+											img.alt = game.name;
+											img.style.display = 'none';
+
+											var placeholder = document.createElement('div');
+											placeholder.className = 'app-icon-placeholder';
+											placeholder.innerHTML = '<strong style="font-size:1.4em;color:rgba(255,255,255,0.45)">?</strong>';
+
+											img.onload  = function() { img.style.display = 'block'; placeholder.style.display = 'none'; };
+											img.onerror = function() { img.style.display = 'none';  placeholder.style.display = 'flex'; };
+
+											inner.appendChild(img);
+											inner.appendChild(placeholder);
+											stage.appendChild(inner);
+											wrap.appendChild(stage);
+
+											// Label appended synchronously — always visible
+											var label = document.createElement('span');
+											label.className = 'app-icon-label';
+											label.textContent = game.name;
+											wrap.appendChild(label);
+
+											wrap.addEventListener('click', (function(id) {
+												return function() { asOpen(id); };
+											})(game.id));
+
+											grid.appendChild(wrap);
+											initTilt(wrap);
+
+											// Load thumb from JSON, fall back to thumb.png
+											fetch('images/projects/' + game.id + '/slides.json')
+												.then(function(r) { return r.json(); })
+												.then(function(data) {
+													var thumbSrc = (!Array.isArray(data) && data.thumb)
+														? data.thumb
+														: 'images/projects/' + game.id + '/thumb.png';
+													img.src = thumbSrc;
+													game._thumb = thumbSrc;
+												})
+												.catch(function() {
+													img.src = 'images/projects/' + game.id + '/thumb.png';
+													game._thumb = img.src;
+												});
+										}); // end GAMES.forEach
+										} // end buildGrid()
+
+										// ── Bootstrap: fetch games.json then build ────────────────
+										fetch('games.json')
+											.then(function(r) { return r.json(); })
+											.then(function(data) {
+												GAMES = data;
+												buildGrid();
+											})
+											.catch(function(err) {
+												console.error('Failed to load games.json:', err);
+											});
+
+										// ── Tilt on proximity ────────────────────────────────────
+										// Radius (px) within which icons start reacting to the mouse
+										var TILT_RADIUS = 180;
+
+										function initTilt(wrap) {
+											var inner = wrap.querySelector('.app-icon-inner');
+											var isSettling = false;
+
+											wrap._tiltUpdate = function(mouseX, mouseY) {
+												var rect = wrap.getBoundingClientRect();
+												var cx = rect.left + rect.width  / 2;
+												var cy = rect.top  + rect.height / 2;
+												var dx = mouseX - cx;
+												var dy = mouseY - cy;
+												var dist = Math.sqrt(dx * dx + dy * dy);
+
+												if (dist > TILT_RADIUS) {
+													// Outside radius — spring back if not already there
+													if (inner._tilted) {
+														inner._tilted = false;
+														inner.style.transition = 'transform 0.35s ease, box-shadow 0.2s';
+														inner.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+														setTimeout(function() { inner.style.transition = ''; }, 360);
+													}
+													return;
+												}
+
+												// Falloff: full tilt at center, zero at TILT_RADIUS edge
+												var strength = 1 - (dist / TILT_RADIUS);
+												// Normalise direction by icon half-size for feel consistency
+												var nx = dx / (rect.width  / 2);
+												var ny = dy / (rect.height / 2);
+												var tiltX =  ny * 12 * strength;
+												var tiltY = -nx * 12 * strength;
+												// Scale up slightly when mouse is close/over
+												var scl = 1 + 0.06 * strength;
+
+												inner._tilted = true;
+												inner.style.transition = '';
+												inner.style.transform = 'rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) scale(' + scl + ')';
+											};
+										}
+
+										// Single global mousemove drives all icons
+										window.addEventListener('mousemove', function(e) {
+											var wraps = document.querySelectorAll('.app-icon-wrap');
+											wraps.forEach(function(w) {
+												if (w._tiltUpdate) w._tiltUpdate(e.clientX, e.clientY);
+											});
+										});
+
+										// ── App Store Open/Close ─────────────────────────────────
+										var currentGame = null;
+										var lbItems = [];
+										var lbIndex = 0;
+
+										window.asOpen = function(id) {
+											var game = GAMES.find(function(g) { return g.id === id; });
+											if (!game) return;
+											currentGame = game;
+
+											// Header
+											var iconEl = document.getElementById('as-icon');
+											iconEl.innerHTML = '<img src="' + (game._thumb || 'images/projects/' + game.id + '/thumb.png') + '" ' +
+												'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" alt="" />' +
+												'<div class="app-icon-placeholder" style="display:none"><strong style="font-size:1.2em;color:rgba(255,255,255,0.45)">?</strong></div>';
+
+											document.getElementById('as-title').innerHTML = game.name;
+											document.getElementById('as-meta').innerHTML  = game.meta;
+
+											var tagsEl = document.getElementById('as-tags');
+											tagsEl.innerHTML = (game.tags || []).map(function(t) {
+												return '<span class="appstore-tag">' + t + '</span>';
+											}).join('');
+
+											document.getElementById('as-desc').textContent = game.desc;
+
+											var rolesEl = document.getElementById('as-roles');
+											rolesEl.innerHTML = (game.roles || []).map(function(r) {
+												return '<span class="appstore-role">' + r + '</span>';
+											}).join('');
+
+											var bulletsEl = document.getElementById('as-bullets');
+											bulletsEl.innerHTML = game.bullets.map(function(b) {
+												return '<li>' + b + '</li>';
+											}).join('');
+
+											// Gallery
+											var galleryArea = document.getElementById('as-gallery-area');
+											galleryArea.innerHTML = '<div class="appstore-gallery-placeholder">Screenshots &amp; footage coming soon</div>';
+											loadGallery(game.id, galleryArea);
+
+											// Scroll sheet to top
+											document.getElementById('appstore-sheet').scrollTop = 0;
+
+											document.getElementById('appstore-overlay').classList.add('active');
+											document.body.style.overflow = 'hidden';
+										};
+
+										window.asClose = function() {
+											document.getElementById('appstore-overlay').classList.remove('active');
+											document.body.style.overflow = '';
+										};
+
+										document.getElementById('appstore-backdrop').addEventListener('click', asClose);
+
+										// ── Load gallery from JSON ───────────────────────────────
+										function loadGallery(id, container) {
+											fetch('images/projects/' + id + '/slides.json')
+												.then(function(r) { return r.json(); })
+												.then(function(data) {
+													var slides = Array.isArray(data) ? data : (data.slides || []);
+
+													// Update thumb from JSON if present
+													if (!Array.isArray(data) && data.thumb) {
+														var imgs = document.querySelectorAll('#as-icon img, #icon-inner-' + id + ' img');
+														imgs.forEach(function(img) { img.src = data.thumb; });
+													}
+
+													if (!slides.length) return;
+													lbItems = slides;
+
+													var wrap = document.createElement('div');
+													wrap.className = 'appstore-gallery-wrap';
+													var strip = document.createElement('div');
+													strip.className = 'appstore-gallery-strip';
+
+													slides.forEach(function(item, i) {
+														var el = document.createElement('div');
+														el.className = 'appstore-gallery-item' + (item.type === 'youtube' ? ' yt-thumb' : '');
+														if (item.type === 'video') {
+															// Use a video element as the thumbnail (shows first frame)
+															var vid = document.createElement('video');
+															vid.src = item.src;
+															vid.muted = true;
+															vid.preload = 'metadata';
+															vid.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none;';
+															el.appendChild(vid);
+														} else {
+															var img = document.createElement('img');
+															img.src = item.type === 'youtube'
+																? 'https://img.youtube.com/vi/' + item.src + '/mqdefault.jpg'
+																: item.src;
+															img.alt = item.alt || '';
+															el.appendChild(img);
+														}
+														el.onclick = (function(idx) {
+															return function() { asLbOpen(idx); };
+														})(i);
+														strip.appendChild(el);
+													});
+
+													wrap.appendChild(strip);
+
+													// Outer wrapper with arrow buttons
+													var outer = document.createElement('div');
+													outer.className = 'appstore-gallery-outer';
+
+													var btnPrev = document.createElement('button');
+													btnPrev.className = 'appstore-gallery-arrow arrow-prev';
+													btnPrev.innerHTML = '&#8249;';
+													btnPrev.disabled = true; // starts at left edge
+
+													var btnNext = document.createElement('button');
+													btnNext.className = 'appstore-gallery-arrow arrow-next';
+													btnNext.innerHTML = '&#8250;';
+
+													outer.appendChild(btnPrev);
+													outer.appendChild(wrap);
+													outer.appendChild(btnNext);
+
+													container.innerHTML = '';
+													container.appendChild(outer);
+													initGallerySwipe(wrap, btnPrev, btnNext);
+												})
+												.catch(function() { /* placeholder stays */ });
+										}
+
+										// ── Gallery swipe ────────────────────────────────────────
+										function initGallerySwipe(wrap, btnPrev, btnNext) {
+											var strip = wrap.querySelector('.appstore-gallery-strip');
+											var startX = 0, startScroll = 0, dragging = false, moved = false;
+											var velX = 0, lastX = 0, rafId = null;
+
+											function cx(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+
+											function getMax() { return Math.max(0, strip.scrollWidth - wrap.clientWidth + 16); }
+
+											function updateArrows() {
+												if (!btnPrev || !btnNext) return;
+												var off = strip._off || 0;
+												var max = getMax();
+												btnPrev.disabled = off <= 1;
+												btnNext.disabled = off >= max - 1;
+											}
+
+											// Arrow button clicks — scroll by one item width
+											if (btnPrev) btnPrev.addEventListener('click', function() {
+												if (rafId) cancelAnimationFrame(rafId);
+												var itemW = strip.firstChild ? strip.firstChild.offsetWidth + 10 : 310;
+												animTo(Math.max(0, (strip._off || 0) - itemW));
+											});
+											if (btnNext) btnNext.addEventListener('click', function() {
+												if (rafId) cancelAnimationFrame(rafId);
+												var itemW = strip.firstChild ? strip.firstChild.offsetWidth + 10 : 310;
+												animTo(Math.min(getMax(), (strip._off || 0) + itemW));
+											});
+
+											wrap.addEventListener('mousedown',  function(e) { dragging=true; moved=false; startX=cx(e); startScroll=strip._off||0; velX=0; lastX=startX; if(rafId) cancelAnimationFrame(rafId); });
+											wrap.addEventListener('touchstart', function(e) { dragging=true; moved=false; startX=cx(e); startScroll=strip._off||0; velX=0; lastX=startX; }, {passive:true});
+
+											window.addEventListener('mousemove', function(e) {
+												if (!dragging) return;
+												var x=cx(e), dx=x-startX;
+												if(Math.abs(dx)>4) moved=true;
+												if(moved && e.cancelable) e.preventDefault();
+												velX=x-lastX; lastX=x; setOff(startScroll-dx);
+											});
+											window.addEventListener('touchmove', function(e) {
+												if (!dragging) return;
+												var x=cx(e), dx=x-startX;
+												if(Math.abs(dx)>4) moved=true;
+												if(moved && e.cancelable) e.preventDefault();
+												velX=x-lastX; lastX=x; setOff(startScroll-dx);
+											}, {passive:false});
+
+											function endDrag() {
+												if(!dragging) return; dragging=false;
+												var v=-velX*0.8;
+												(function momentum(){ if(Math.abs(v)<0.4){clamp();return;} setOff((strip._off||0)+v); v*=0.88; rafId=requestAnimationFrame(momentum); })();
+											}
+											window.addEventListener('mouseup', endDrag);
+											window.addEventListener('touchend', endDrag);
+
+											function setOff(val) {
+												var max=getMax();
+												if(val<0) val*=0.25;
+												if(val>max) val=max+(val-max)*0.25;
+												strip._off=val; strip.style.transform='translateX('+(-val)+'px)';
+												updateArrows();
+											}
+											function clamp() {
+												var max=getMax();
+												var t=Math.max(0,Math.min(strip._off||0,max)); animTo(t);
+											}
+											function animTo(t) {
+												var c=strip._off||0, d=t-c;
+												if(Math.abs(d)<0.5){setOff(t);return;}
+												setOff(c+d*0.18); rafId=requestAnimationFrame(function(){animTo(t);});
+											}
+											wrap.addEventListener('click',function(e){if(moved){e.stopPropagation();e.preventDefault();}},true);
+
+											// Init arrow state after layout settles
+											setTimeout(updateArrows, 50);
+										}
+
+										// ── Lightbox ─────────────────────────────────────────────
+										window.asLbOpen = function(idx) {
+											lbIndex = idx;
+											document.getElementById('as-lightbox').classList.add('active');
+											document.body.style.overflow = 'hidden';
+											asLbRender();
+										};
+										window.asLbClose = function() {
+											var media = document.getElementById('as-lb-media');
+											var vid = media.querySelector('video');
+											if (vid) { vid.pause(); vid.src = ''; }
+											document.getElementById('as-lightbox').classList.remove('active');
+											media.innerHTML = '';
+										};
+										window.asLbMove = function(dir) {
+											lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+											asLbRender();
+										};
+										function asLbRender() {
+											var item  = lbItems[lbIndex];
+											var media = document.getElementById('as-lb-media');
+											// Stop any playing video before clearing
+											var oldVid = media.querySelector('video');
+											if (oldVid) { oldVid.pause(); oldVid.src = ''; }
+											media.innerHTML = '';
+											if (item.type === 'youtube') {
+												var f = document.createElement('iframe');
+												f.src = 'https://www.youtube.com/embed/' + item.src + '?autoplay=1';
+												f.allow = 'autoplay; fullscreen';
+												f.allowFullscreen = true;
+												media.appendChild(f);
+											} else if (item.type === 'video') {
+												var vid = document.createElement('video');
+												vid.src = item.src;
+												vid.controls = true;
+												vid.autoplay = true;
+												vid.loop = true;
+												vid.style.cssText = 'max-width:100%;max-height:75vh;border-radius:6px;';
+												media.appendChild(vid);
+											} else {
+												var img = document.createElement('img');
+												img.src = item.src;
+												img.alt = item.alt || '';
+												media.appendChild(img);
+											}
+											document.getElementById('as-lb-counter').textContent = (lbIndex+1) + ' / ' + lbItems.length;
+										}
+
+										document.addEventListener('keydown', function(e) {
+											if (document.getElementById('as-lightbox').classList.contains('active')) {
+												if (e.key==='ArrowLeft')  asLbMove(-1);
+												if (e.key==='ArrowRight') asLbMove(1);
+												if (e.key==='Escape')     asLbClose();
+												return;
+											}
+											if (document.getElementById('appstore-overlay').classList.contains('active')) {
+												if (e.key==='Escape') asClose();
+											}
+										});
+
+									})();
+									</script>
+
 								</div>
-							</section>	
+							</section>
 
 						<!-- Three -->
 							<section id="three">
@@ -136,113 +938,9 @@
 									<ul class="actions">
 										<li><a href="https://www.linkedin.com/in/taylor-christianson-066991159/" class="button primary icon brands alt fa-linkedin" target="_blank">  LinkedIn</a></li>
 										<li><a href="https://github.com/lobsterisme" class="button primary icon brands alt fa-github" target="_blank">  GitHub</a></li>
-										<li><a href="mailto:tchristianson@alumni.fullsail.edu" class="button primary icon solid alt fa-envelope" target="_blank">  Email</a></li>
+										<li><a href="/cdn-cgi/l/email-protection#deaabdb6acb7adaab7bfb0adb1b09ebfb2abb3b0b7f0b8abb2b2adbfb7b2f0bbbaab" class="button primary icon solid alt fa-envelope" target="_blank">  Email</a></li>
 										<li><a class="button icon brands alt fa-discord">  Lobsterisme</a></li>
 									</ul>
-								</div>
-							</section>
-
-						<!-- Five -->
-							<section id="five">
-								<div class="container">
-									<h3>All Projects</h3>
-									<p>A detailed look at all of my projects.</p>
-
-									<!-- PROFESSIONAL EXPERIENCE -->
-									<h4>Professional — Halfbrick Studios (Oct 2021 – Feb 2026)</h4>
-
-									<article>
-										<header>
-											<h4>Scraptics <span style="font-weight:normal;font-size:0.9em;">(Working Title &mdash; Closed Beta &mdash; Unity 6, C#, iOS &amp; Android)</span></h4>
-										</header>
-										<p>A tactical roguelike on a hex grid with a unique inventory puzzle mechanic. I pitched this in an internal game jam, it was greenlit for full production, and I led it as programmer, designer, and team lead for 3 years.</p>
-										<ul>
-											<li>Architected the full systems stack: turn management, hex-grid logic, roguelike progression, and inventory puzzle systems</li>
-											<li>Wrote complex recursive algorithms powering the core puzzle mechanic</li>
-											<li>Designed and programmed enemy AI behavior systems</li>
-											<li>Developed custom editor tools to support content creation and team workflows</li>
-											<li>Built full UI/UX across all game screens and menus</li>
-											<li>Cross-platform iOS &amp; Android builds including profiling and performance optimization</li>
-											<li>Leaderboard networking and metadata architecture using Unity Cloud Services</li>
-											<li>Cross-platform save systems</li>
-											<li>Led a team of 4 developers across the full production lifecycle</li>
-										</ul>
-									</article>
-
-									<article>
-										<header>
-											<h4>Unannounced Mobile Project <span style="font-weight:normal;font-size:0.9em;">(Unreleased &mdash; Unity, C#)</span></h4>
-										</header>
-										<p>A 2D side-scrolling endless runner with a novel physics-driven swinging mechanic. I created the prototype that was greenlit, then led the project as programmer and project lead until it was paused due to shifting company priorities.</p>
-										<ul>
-											<li>Created the original prototype establishing the core loop and swinging mechanic</li>
-											<li>Led physics prototyping and mechanical iteration</li>
-											<li>Project lead and lead programmer for a team of 4</li>
-										</ul>
-									</article>
-
-									<h4>Game Jams</h4>
-
-									<article>
-										<header>
-											<h4>Sumo Fight <span style="font-weight:normal;font-size:0.9em;">(2024 &mdash; Internal Halfbrick Game Jam &mdash; Unity 6, Photon, C#, iOS &amp; Android)</span></h4>
-										</header>
-										<p>Multiplayer party game built in one week. Lead programmer on a team of 5.</p>
-										<ul>
-											<li>Photon networking for player customization sync and core gameplay</li>
-										</ul>
-									</article>
-
-									<article>
-										<header>
-											<h4>Survivors Aren't Dead <span style="font-weight:normal;font-size:0.9em;">(2023 &mdash; Internal Halfbrick Game Jam &mdash; Unity 6, C#, iOS &amp; Android)</span></h4>
-										</header>
-										<p>Survivor-like action game built in one week. Project lead on a team of 4.</p>
-										<ul>
-											<li>Created the pitch and core design document</li>
-											<li>Lead programmer, enemy behavior programmer, and sound designer</li>
-										</ul>
-									</article>
-
-									<article>
-										<header>
-											<h4>Memoria Damnum <span style="font-weight:normal;font-size:0.9em;">(Jan 2020 &mdash; Global Game Jam 2020 &mdash; Unity, C#, PC)</span></h4>
-										</header>
-										<p>2D platformer built in 48 hours for Global Game Jam 2020. Programming lead on a team of 9.</p>
-										<ul>
-											<li>Object pooling system for collectibles with persistent collection state</li>
-											<li>Contributed to level design, audio systems, GameManager architecture, and VFX</li>
-										</ul>
-									</article>
-
-									<!-- PRE-INDUSTRY PROJECTS -->
-									<h4>Pre-Industry Projects</h4>
-
-									<article>
-										<header>
-											<h4>To The Moon! <span style="font-weight:normal;font-size:0.9em;">(Feb &ndash; Jun 2021 &mdash; Unity HDRP, Photon, C#, PC)</span></h4>
-										</header>
-										<p>3D multiplayer space shooter. Capstone project at Full Sail University. Project lead on a team of 6.</p>
-										<ul>
-											<li>AI fighter ships using steering behaviors and compute shaders for improved framerate at scale</li>
-											<li>Full Photon networking stack: GameManager, MatchManager, weapons, projectiles, loading transitions, procedural map generation</li>
-											<li>All multiplayer UI: ready-up system, name changing, lobby/player listing, scoreboard, score tracking, and hit registration</li>
-											<li>Player controller with single/multiplayer versions via polymorphism and inheritance</li>
-										</ul>
-									</article>
-
-									<article>
-										<header>
-											<h4>Retrospectre <span style="font-weight:normal;font-size:0.9em;">(Sep &ndash; Nov 2019 &mdash; Unity, C#, PC &amp; Web)</span></h4>
-										</header>
-										<p>2.5D metroidvania platformer. Project lead on a team of 4.</p>
-										<ul>
-											<li>AI systems for 8+ distinct enemy types with varied behaviors and attack patterns</li>
-											<li>Player controller, weapon systems, and projectile mechanics</li>
-											<li>Level design and all interactable systems: destructible areas, climbable walls, moving platforms, environmental puzzles</li>
-										</ul>
-									</article>
-
 								</div>
 							</section>
 
@@ -592,7 +1290,4 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</div>
 
 		<!-- Scripts -->
-			<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-	
+			<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728
