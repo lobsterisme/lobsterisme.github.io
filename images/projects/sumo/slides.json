@@ -2,7 +2,7 @@
   "thumb": "images/projects/sumo/sumo-thumb.png",
   "slides":
   [
-    { "type": "youtube", "src": "i5nccmySbRw",                                    "alt": "Sumo Fight video" },
+    { "type": "youtube", "src": "i5nccmySbRw",                           "alt": "Sumo Fight video" },
     { "type": "image",   "src": "images/projects/sumo/sumo-slide-1.png", "alt": "Sumo Fight slide 1" },
     { "type": "image",   "src": "images/projects/sumo/sumo-slide-2.png", "alt": "Sumo Fight slide 2" },
     { "type": "image",   "src": "images/projects/sumo/sumo-slide-3.png", "alt": "Sumo Fight slide 3" },
