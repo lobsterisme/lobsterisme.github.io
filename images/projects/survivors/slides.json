@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/survivors/sad-thumb.webp",
+  "background": "images/projects/survivors/sad-background.webp",
   "slides":
   [
     { "type": "image",   "src": "images/projects/survivors/sad-slide-1.webp", "alt": "SAD slide 1" },

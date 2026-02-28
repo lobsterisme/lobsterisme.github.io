@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/retrospectre/retro-thumb.png",
+  "background": "images/projects/retrospectre/retro-thumb.png",
   "slides":
   [
     { "type": "youtube", "src": "cK-FKjk-ZCo",                                    "alt": "Retrospectre trailer" },

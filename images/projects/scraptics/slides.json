@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/scraptics/scraptics-thumb.png",
+  "background": "images/projects/scraptics/scraptics-background.png",
   "slides":
   [
     { "type": "image",   "src": "images/projects/scraptics/scraptics-title-1.png", "alt": "" },

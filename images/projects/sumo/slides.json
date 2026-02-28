@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/sumo/sumo-thumb.png",
+  "background": "images/projects/sumo/sumo-slide-9.png",
   "slides":
   [
     { "type": "youtube", "src": "i5nccmySbRw",                           "alt": "Sumo Fight video" },

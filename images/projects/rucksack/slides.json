@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/rucksack/rucksack-thumb.png",
+  "background": "images/projects/rucksack/rucksack-background.png",
   "slides":
   [
     { "type": "youtube", "src": "OH3pSlfQwc8",                                   "alt": "Retrospectre trailer" },

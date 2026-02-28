@@ -1,5 +1,6 @@
 {
   "thumb": "images/projects/to-the-moon/moon-thumb.png",
+  "background": "images/projects/to-the-moon/moon-slide-1.png",
   "slides": 
   [
     { "type": "youtube", "src": "8iGjbVhnlgs",                                  "alt": "ToTheMoon trailer"},
