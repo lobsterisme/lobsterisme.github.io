@@ -32,7 +32,6 @@
 				<footer>
 					<ul class="icons">
 						<li><a href="https://www.linkedin.com/in/taylor-christianson-066991159/" class="icon brands alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#four" class="icon brands alt fa-discord"><span class="label">Discord</span></a></li>
 						<li><a href="https://github.com/lobsterisme" class="icon brands alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
 						<li><a href="/cdn-cgi/l/email-protection#7703141f051e04031e161904181937161b021a191e5911021b1b04161e1b59121302" class="icon solid alt fa-envelope" target="_blank"><span class="label">Email</span></a></li>
 					</ul>
@@ -57,7 +56,7 @@
 									<header class="major">
 										<h2>I pitch it, build it, and ship it.</h2>
 									</header>
-									<p>I'm Taylor Christianson — a game developer and natural team lead with 4.5 years of professional experience at Halfbrick Studios. I consistently take on lead roles across every project I work on, from pitching ideas and building prototypes to driving teams from concept through production. My technical expertise is in Unity and C#, with generalist experience spanning systems architecture, game design, mobile optimization, and tool development.</p>
+									<p> FIX THIS I'm Taylor Christianson — a game developer and natural team lead with 4.5 years of professional experience at Halfbrick Studios. I consistently take on lead roles across every project I work on, from pitching ideas and building prototypes to driving teams from concept through production. My technical expertise is in Unity and C#, with generalist experience spanning systems architecture, game design, mobile optimization, and tool development.</p>
 								</div>
 							</section>
 
@@ -70,10 +69,10 @@
 									<style>
 										/* ── App Grid ── */
 										.app-grid {
-											display: flex;
-											flex-wrap: wrap;
+											display: grid;
+											grid-template-columns: repeat(auto-fill, minmax(80px, 120px));
 											gap: 2em 1.5em;
-											justify-content: flex-start;
+											justify-content: center;
 											padding: 1em 0 2.5em;
 											overflow: visible;
 										}
@@ -81,20 +80,20 @@
 											display: flex;
 											flex-direction: column;
 											align-items: center;
-											width: 120px;
+											width: 100%;
 											cursor: pointer;
 											user-select: none;
 											overflow: visible;
 										}
 										.app-icon-stage {
-											width: 120px;
-											height: 120px;
+											width: 100%;
+											aspect-ratio: 1;
 											perspective: 500px;
 										}
 										.app-icon-inner {
 											width: 100%;
 											height: 100%;
-											border-radius: 26px;
+											border-radius: clamp(16px, 22%, 26px);
 											overflow: hidden;
 											box-shadow: 0 6px 24px rgba(0,0,0,0.5);
 											transform-style: preserve-3d;
@@ -129,7 +128,7 @@
 											text-align: center;
 											color: #3d4449 !important;
 											line-height: 1.3;
-											width: 120px;
+											width: 100%;
 											word-break: break-word;
 											position: relative;
 											z-index: 1;
@@ -137,18 +136,29 @@
 
 										/* ── App Store Popup ── */
 										.appstore-overlay {
-											display: none;
+											visibility: hidden;
+											pointer-events: none;
 											position: fixed;
 											inset: 0;
 											z-index: 9999;
+											display: flex;
+											align-items: flex-end;
 										}
-										.appstore-overlay.active { display: flex; align-items: flex-end; }
+										.appstore-overlay.active {
+											visibility: visible;
+											pointer-events: auto;
+										}
 										.appstore-backdrop {
 											position: absolute;
 											inset: 0;
 											backdrop-filter: blur(14px) brightness(0.4);
 											-webkit-backdrop-filter: blur(14px) brightness(0.4);
 											background: rgba(0,0,0,0.5);
+											opacity: 0;
+											transition: opacity 0.28s ease;
+										}
+										.appstore-overlay.active .appstore-backdrop {
+											opacity: 1;
 										}
 										.appstore-sheet {
 											position: relative;
@@ -161,7 +171,7 @@
 											overflow-y: auto;
 											padding: 0 0 2em;
 											transform: translateY(100%);
-											transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+											transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 										}
 										.appstore-sheet::before {
 											content: '';
@@ -701,6 +711,14 @@
 
 										document.getElementById('appstore-backdrop').addEventListener('click', asClose);
 
+										// Block background page scroll on mobile when overlay is open
+										document.getElementById('appstore-overlay').addEventListener('touchmove', function(e) {
+											// Allow touch scrolling inside the sheet, block everything else
+											if (!e.target.closest('#appstore-sheet')) {
+												e.preventDefault();
+											}
+										}, { passive: false });
+
 										// ── Load gallery from JSON ───────────────────────────────
 										function loadGallery(id, container) {
 											fetch('images/projects/' + id + '/slides.json')
@@ -931,7 +949,7 @@
 							<section id="three">
 								<div class="container">
 									<h3>Resume</h3>
-									<p>Some of my skills and credentials.</p>
+									<p>Some of my skills and credentials. FIX THIS</p>
 									<div class="row">
 										<div class="col-6 col-12-xsmall">
 											<header>
@@ -941,26 +959,26 @@
 										</div>
 										<div class="col-6 col-12-xsmall">
 											<header>
-												<h4>Lead Programmer / Project Lead</h4>
-												<p>Halfbrick Studios &bull; Oct 2021 &ndash; Feb 2026</p>
+												<h4>Lead Programmer / Project Lead / Generalist</h4>
+												<p>Halfbrick Studios &bull; Oct 2021 &ndash; Mar 2026</p>
 											</header>
 										</div>
 									</div>
 									<br />
 									<ul class="feature-icons">
-										<li class="icon solid fa-code">C#, C++, HLSL</li>
+										<li class="icon solid fa-code">C# &bull; C++ &bull; HLSL &bull; HTML</li>
 										<li class="icon solid fa-gamepad">Unity (URP / HDRP / 6 / Cloud) &bull; Photon Networking</li>
 										<li class="icon solid fa-mobile-alt">iOS &amp; Android &bull; Profiling &amp; Optimization</li>
 										<li class="icon solid fa-code-branch">Perforce &bull; Git &bull; TeamCity</li>
 										<li class="icon solid fa-tools">JetBrains Rider &bull; Visual Studio &bull; Cursor AI</li>
 										<li class="icon solid fa-layer-group">Agile/Scrum &bull; Game &amp; Systems Design</li>
-										<li class="icon solid fa-robot">AI Systems &bull; Procedural Generation</li>
-										<li class="icon solid fa-users">Team Leadership &bull; Tool Development</li>
+										<li class="icon solid fa-robot">AI Systems &bull; Procedural Generation &bull; Tool Development</li>
+										<li class="icon solid fa-users">Team Leadership </li>
 									</ul>
 									<br />
 									<ul class="actions">
-										<li><a href="downloads/TChristianson-CondensedResume.pdf" download class="button primary icon solid fa-download" target="_blank">1-Page Resume</a></li>
-										<li><a href="downloads/TChristianson-FullResume.pdf" download class="button primary icon solid fa-download" target="_blank">Full Resume</a></li>
+										<li><a href="downloads/Taylor_Christianson_Resume_2026.pdf" download class="button primary icon solid fa-download" target="_blank">1-Page Resume</a></li>
+										<li><a href="downloads/TChristianson-FullResume.pdf" download class="button primary icon solid fa-download" target="_blank">Full Resume FIX THIS</a></li>
 									</ul>
 								</div>
 							</section>
@@ -971,10 +989,9 @@
 									<h3>Contact Me</h3>
 									<p>Feel free to reach out at any of the options below!</p>
 									<ul class="actions">
-										<li><a href="https://www.linkedin.com/in/taylor-christianson-066991159/" class="button primary icon brands alt fa-linkedin" target="_blank">  LinkedIn</a></li>
+										<li><a href="https://www.linkedin.com/in/gamedevtaylor/" class="button primary icon brands alt fa-linkedin" target="_blank">  LinkedIn</a></li>
 										<li><a href="https://github.com/lobsterisme" class="button primary icon brands alt fa-github" target="_blank">  GitHub</a></li>
 										<li><a href="/cdn-cgi/l/email-protection#deaabdb6acb7adaab7bfb0adb1b09ebfb2abb3b0b7f0b8abb2b2adbfb7b2f0bbbaab" class="button primary icon solid alt fa-envelope" target="_blank">  Email</a></li>
-										<li><a class="button icon brands alt fa-discord">  Lobsterisme</a></li>
 									</ul>
 								</div>
 							</section>
@@ -1325,4 +1342,56 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</div>
 
 		<!-- Scripts -->
-			<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+			window.addEventListener('load', function() {
+				var navLinks = Array.from(document.querySelectorAll('#nav ul li a'));
+				var sectionIds = navLinks.map(function(l) { return l.getAttribute('href').replace('#',''); });
+				var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+
+				// Track how much of each section is visible
+				var visibility = {};
+				sections.forEach(function(s) { visibility[s.id] = 0; });
+
+				function updateActive() {
+					// If scrolled to bottom, always highlight last
+					var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 10;
+					var activeId;
+					if (atBottom) {
+						activeId = sections[sections.length - 1].id;
+					} else {
+						// Pick section with most visible pixels
+						var bestId = null, bestPx = 0;
+						sections.forEach(function(s) {
+							if (visibility[s.id] > bestPx) {
+								bestPx = visibility[s.id];
+								bestId = s.id;
+							}
+						});
+						activeId = bestId;
+					}
+					navLinks.forEach(function(l) {
+						l.classList.toggle('active', l.getAttribute('href') === '#' + activeId);
+					});
+				}
+
+				var observer = new IntersectionObserver(function(entries) {
+					entries.forEach(function(entry) {
+						visibility[entry.target.id] = entry.intersectionRect.height;
+					});
+					updateActive();
+				}, { threshold: Array.from({length: 101}, function(_, i) { return i / 100; }) });
+
+				sections.forEach(function(s) { observer.observe(s); });
+				window.addEventListener('scroll', updateActive, { passive: true });
+			});
+		</script>
+
+		</body>
+	</html>
